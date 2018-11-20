@@ -52,7 +52,6 @@ namespace OARP
             {
                 Combinaison.Add(Eleves[0]);
             }
-            CalculerNote();
             TesterCombinaison(Eleves[1]);           
         }
 
@@ -75,29 +74,75 @@ namespace OARP
                 int indexP= Projets.IndexOf(p);
                 if(Combinaison[indexP]==Eleves[0])
                 {
+                    
+                    //Condition d'arret de la recursivité : Si on a plus d'élèves à traiter en stock
                     Combinaison[indexP]=eleve;
-                }
-
-                //Condition d'arret de la recursivité : Si on a plus d'élèves à traiter en stock
-                if(index+1>=Eleves.Count())
-                {
-                    CalculerNote();
-                    ReinitialiserCombinaison();
-                    Console.WriteLine("===================");
-                }
-                else
-                {
-                    TesterCombinaison(Eleves[index + 1]);
+                    if (index + 1 >= Eleves.Count())
+                    {
+                        if(VerifierComplet())
+                        {
+                            CalculerNote();
+                        }
+                        Combinaison[indexP] = Eleves[0];
+                    }
+                    else
+                    {
+                        TesterCombinaison(Eleves[index + 1]);
+                        Combinaison[indexP] = Eleves[0];
+                    }
                 }
                 
-
             }
+
         }
         
         public void CalculerNote()
         {
+            int somme = 0;
+            List<double> notes = new List<double>();
+            foreach(Personne e in Combinaison)
+            {
+                if(e!=Eleves[0])
+                {
+                    int place = Combinaison.IndexOf(e);
+                    string projet = Projets[place];
+                    int voeux = e.RecupererVoeux(projet);
+                    somme += voeux;
+                    notes.Add(voeux);
+                }
+                
+            }
+            double moyenne = Convert.ToDouble(somme) / (Eleves.Count() - 1);
+            double s = CalculerEcartType(moyenne, notes);
+            double note = somme - s;
+            Console.WriteLine("Note = " +note);
             AfficherCombinaison();
+            
         }
+        
+        public double CalculerEcartType(double moyenne,List<double> donnees)
+        {
+            double s = 0;
+            foreach(int d in donnees)
+            {
+                s += Math.Pow((d - moyenne),2);
+            }
+            double n = donnees.Count();
+            s = s / n;
+            s = Math.Sqrt((n/(n-1))*s);
+            s = Math.Round(s, 3);
+            return s;
+        }
+        /*
+         *double moyenne = Moyenne(t);
+   double somme =0.0;
+   for (int i=0; i<t.Length; i++) 
+   {
+    double delta = t[i] - moyenne;
+    somme += delta*delta;
+   }
+   return Math.Sqrt(somme/(t.Length-1));
+         */
 
         public void AfficherCombinaison()
         {
@@ -106,7 +151,20 @@ namespace OARP
             {
                 affichage += "Place " + i+" : "+Combinaison[i].Nom + "\n";
             }
+            affichage += "====================================";
             Console.WriteLine(affichage);
+        }
+
+        public bool VerifierComplet()
+        {
+            foreach(Personne eleve in Eleves)
+            {
+                if(!Combinaison.Contains(eleve))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

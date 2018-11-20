@@ -13,7 +13,6 @@ namespace OARP
         public List<string> Projets { get; set; }
         public List<int> Voeux { get; set; }
         List<Personne> Affinite { get; set; }
-        string ProjetAssocie { get; set; }
 
         //CONSTRUCTEUR
         public Personne(string nom)
@@ -34,5 +33,10 @@ namespace OARP
             Console.WriteLine(affichage);
         }
         
+        public int RecupererVoeux(string projet)
+        {
+            int index = Projets.IndexOf(projet);
+            return Voeux[index];
+        }
     }
 }
