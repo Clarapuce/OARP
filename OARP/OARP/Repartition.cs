@@ -12,7 +12,7 @@ namespace OARP
         public List<Personne> Eleves { get; set; }
         public int NbPlaces{ get; set; }
         public List<Personne> Combinaison { get; set; }
-
+        public double Max { get; set; }
         public Repartition(List<string> p, List<Personne> e,int nbplace)
         {
             Projets = p;
@@ -116,7 +116,12 @@ namespace OARP
             double s = CalculerEcartType(moyenne, notes);
             double note = somme - s;
             Console.WriteLine("Note = " +note);
-            AfficherCombinaison();
+            if(note >= Max)
+            {
+                AfficherCombinaison();
+                Max = note;
+            }
+            
             
         }
         
