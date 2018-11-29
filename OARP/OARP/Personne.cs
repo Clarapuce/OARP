@@ -22,6 +22,11 @@ namespace OARP
             Voeux = new List<int>();
         }
 
+        public Personne(string nom, List<string> projet, List<int> voeux):this(nom)
+        {
+            Projets = projet;
+            Voeux = voeux;
+        }
         //METHODES
         public void AfficherVoeux()
         {
@@ -33,6 +38,10 @@ namespace OARP
             Console.WriteLine(affichage);
         }
         
+        public void AjouterVoeux(string projet, int rang)
+        {
+            Projets.Add(projet);Voeux.Add(rang);
+        }
         public int RecupererVoeux(string projet)
         {
             int index = Projets.IndexOf(projet);

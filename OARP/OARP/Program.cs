@@ -30,31 +30,30 @@ namespace OARP
             //e3.Projets.Add("A"); e3.Projets.Add("B"); e3.Projets.Add("C"); e3.Projets.Add("D");
             //e3.Voeux.Add(4); e3.Voeux.Add(4); e3.Voeux.Add(4); e3.Voeux.Add(3);
             //R.Repartir();
-            List<string> roles = new List<string>();
-            roles.Add("Lat"); roles.Add("Alte"); roles.Add("Shra"); roles.Add("Rash"); roles.Add("Velv"); roles.Add("Popo"); roles.Add("Tsi"); roles.Add("Barag"); roles.Add("Kip");
-            roles.Add("Tzia"); roles.Add("Rosen"); roles.Add("Lish"); roles.Add("Angel"); roles.Add("Moine"); roles.Add("Psho");
-            Personne Math = new Personne("Math");
-            Personne Lea = new Personne("Lea");
-            Personne Mc = new Personne("Mc");
-            Personne Sacha = new Personne("Sacha");
-            Personne Youri = new Personne("Youri");
-            Personne Alexandre = new Personne("Alexandre");
-            Personne Seb = new Personne("Seb");
-            Personne Clara = new Personne("Clara");
-            Personne Laetitia = new Personne("Laetitia");
-            Personne Celine = new Personne("Celine");
-            Personne Quentin = new Personne("Quentin");
-            Personne Nico = new Personne("Nico");
-            Personne Louis = new Personne("Louis");
-            Personne Alizé = new Personne("Alizé");
-            Personne Maïa = new Personne("Maïa");
+            List<string> roles = new List<string>() {"Lat"  ,"Alte"  ,"Shra"  ,"Rash"  ,"Velv"  ,"Popo"  ,"Tsi"  ,"Barag"  ,"Kip"
+            ,"Tzia"  ,"Rosen"  ,"Lish"  ,"Angel"  ,"Moine"  ,"Psho" };
+             
+            Personne Math = new Personne("Math", new List<string>() {"Kip","Lat","Moine" } ,new List<int>() { 15,14,13});
+            Personne Lea = new Personne("Lea", new List<string>() {"Tsi","Shra","Angel","Moine" }, new List<int>() {15,14,13,12 });
+            Personne Mc = new Personne("Mc", new List<string>() {"Shra","Tsi","Tzia","Lish"}, new List<int>() { 15,14,13,12});
+            Personne Sacha = new Personne("Sacha", new List<string>() {"Lish","Rosen","Psho","Angel" }, new List<int>() {15,14,13,12 });
+            Personne Youri = new Personne("Youri", roles, new List<int>() {15,14,14,14,14,14,14,14,14,14,14,14,14,14,14 });
+            Personne Alexandre = new Personne("Alexandre", roles, new List<int>() {15,15,15,15,15,15,15,15,15,15,15,15,15,15,15 });
+            Personne Seb = new Personne("Seb", roles, new List<int>() { 10, 10, 10, 10, 10, 10, 10, 11, 14, 10, 15, 14, 10, 13, 10 });
+
+            Personne Clara = new Personne("Clara", new List<string>() {"Lat"  ,"Alte" ,"Kip","Tzia"  ,"Rosen"  ,"Lish"  ,"Angel" }, new List<int>() {15,14,13,15,15,15,15 });
+            Personne Laetitia = new Personne("Laetitia", new List<string>() {"Rash","Barag","Psho","Popo","Velv","Angel" }, new List<int>() { 15, 14, 13, 12, 11, 10 });
+            Personne Celine = new Personne("Celine", new List<string>() {"Tzia","Kip","Lish","Psho","Alte" }, new List<int>() { 15,14,14,13,12});
+            Personne Quentin = new Personne("Quentin", new List<string>() { "Rosen","Lish","Angel","Popo"}, new List<int>() { 15,14,13,12});
+            Personne Nico = new Personne("Nico", new List<string>() {"Velv","Popo" }, new List<int>() { 15,15});
+            Personne Louis = new Personne("Louis", new List<string>() { "Lat", "Barag", "Moine", "Kip", "Rash", "Angel", "Alte", "Velv", "Popo", "Tsi", "Tzia", "Shra", "Rosen", "Lish", "Psho" }, new List<int>() {15,14,13,12,11,10,9,9,9,9,9,9,9,9,9 });
+            Personne Alize = new Personne("Alizé", new List<string>() {"Rash","Kip","Alte","Angel" }, new List<int>() {15,14,14,13 });
+            Personne Maia = new Personne("Maïa", new List<string>() {"Tsi","Tzia","Rosen","Lat","Lish","Kip","Shra" }, new List<int>() {15,14,13,12,11,10,9 });
             Personne vide = new Personne("");
-            List<Personne> eleves = new List<Personne>();
-            eleves.Add(Math); eleves.Add(Lea); eleves.Add(Mc); eleves.Add(Sacha); eleves.Add(Youri); eleves.Add(Alexandre); eleves.Add(Seb);
-            eleves.Add(Clara); eleves.Add(Laetitia); eleves.Add(Celine); eleves.Add(Quentin); eleves.Add(Nico); eleves.Add(Louis); eleves.Add(Alizé);
-            eleves.Add(Maïa);
+            List<Personne> eleves = new List<Personne>() {vide,Math,Lea,Mc,Sacha,Youri,Alexandre,Seb,Clara,Laetitia,Celine,Quentin,Nico,Louis,Alize,Maia};
             Repartition R = new Repartition(roles, eleves, 1);
-            R.Voter();
+
+
             R.Repartir();
         }
     }

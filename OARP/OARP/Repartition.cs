@@ -79,7 +79,8 @@ namespace OARP
                     Combinaison[indexP]=eleve;
                     if (index + 1 >= Eleves.Count())
                     {
-                        if(VerifierComplet())
+                        
+                        if (VerifierComplet())
                         {
                             CalculerNote();
                         }
@@ -114,10 +115,11 @@ namespace OARP
             }
             double moyenne = Convert.ToDouble(somme) / (Eleves.Count() - 1);
             double s = CalculerEcartType(moyenne, notes);
-            double note = somme - s;
-            Console.WriteLine("Note = " +note);
+            double note = somme -  s;
+            
             if(note >= Max)
             {
+                Console.WriteLine("Note = " + note);
                 AfficherCombinaison();
                 Max = note;
             }
@@ -154,7 +156,7 @@ namespace OARP
             string affichage = "";
             for(int i =0; i<Combinaison.Count();i++)
             {
-                affichage += "Place " + i+" : "+Combinaison[i].Nom + "\n";
+                affichage += Projets[i]+" : "+Combinaison[i].Nom + "\n";
             }
             affichage += "====================================";
             Console.WriteLine(affichage);
@@ -164,9 +166,13 @@ namespace OARP
         {
             foreach(Personne eleve in Eleves)
             {
-                if(!Combinaison.Contains(eleve))
+                if(eleve!=Eleves[0])
                 {
-                    return false;
+
+                    if (!Combinaison.Contains(eleve))
+                    {
+                        return false;
+                    }
                 }
             }
             return true;
