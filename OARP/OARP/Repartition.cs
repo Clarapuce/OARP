@@ -10,11 +10,12 @@ namespace OARP
     {
         public List<string> Projets { get; set; }
         public List<Personne> Eleves { get; set; }
-
+        public double Max { get; set; }
         public Repartition(List<string> p, List<Personne> e)
         {
             Projets = p;
             Eleves = e;
+            Max = 0;
         }
         
         public void Voter()
