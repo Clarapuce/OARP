@@ -53,62 +53,30 @@ namespace OARP
             //List<Personne> eleves = new List<Personne>() {vide,Math,Lea,Mc,Sacha,Youri,Alexandre,Seb,Clara,Laetitia,Celine,Quentin,Nico,Louis,Alize,Maia};
             //Repartition R = new Repartition(roles, eleves, 1);
 
-            ////Repartition plats
-            //List<string> plats = new List<string>() { "Tartiflette","Tartiflette","Tartiflette","Tartiflette","Bolo","Bolo" ,"Bolo","Bolo","Salade","Salade","Salade","Salade","Curry","Curry","Curry","Curry"};
-            //Personne Ribeiro = new Personne("Ribeiro", new List<string>() { "Tartiflette" ,"Bolo","Salade","Curry"}, new List<int>() { 3,3,2,4});
-            //Personne Cavel = new Personne("Cavel", new List<string>() { "Tartiflette", "Bolo","Curry" }, new List<int>() { 4,3,2 });
-            //Personne Marlier = new Personne("Marlier", new List<string>() { "Tartiflette", "Bolo", "Salade" }, new List<int>() { 3,4,2 });
-            //Personne Montaut = new Personne("Montaut", new List<string>() { "Tartiflette", "Bolo" }, new List<int>() { 3, 4});
-            //Personne Guidicelli = new Personne("Guidicelli", new List<string>() { "Tartiflette", "Bolo", "Salade","Curry" }, new List<int>() {4,3,2,1 });
-            //Personne Perie = new Personne("Perie", new List<string>() { "Tartiflette", "Bolo", "Curry" }, new List<int>() { 4,2,3 });
-            //Personne Randria = new Personne("Randria", new List<string>() { "Tartiflette", "Bolo", "Salade" }, new List<int>() { 3,2,4 });
-            //Personne Cliff = new Personne("Cliff", new List<string>() { "Tartiflette", "Bolo",  "Curry" }, new List<int>() {4,4,3 });
-            //Personne Math = new Personne("Math", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 3,2,4,1 });
-            //Personne Emma = new Personne("Emma", new List<string>() {  "Bolo", "Salade", "Curry" }, new List<int>() { 2,4,3 });
-            //Personne Katell = new Personne("Katell", new List<string>() { "Tartiflette", "Bolo" }, new List<int>() { 4,3 });
-            //Personne Andrea = new Personne("Andrea", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 4, 2,1,3});
-            //Personne Andriantso= new Personne("Andriantso", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 4, 3, 2, 1 });
-            //Personne Morelle = new Personne("Morelle", new List<string>() { "Tartiflette", "Bolo", "Curry" }, new List<int>() { 4, 2,3 });
-            //Personne Dut = new Personne("Dut", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 3, 2, 1 ,4});
-            //Personne Loizel = new Personne("Loizel", new List<string>() { "Salade", "Curry" }, new List<int>() { 3,4});
-            //Personne vide = new Personne("");
-            //List<Personne> eleves = new List<Personne>() { vide, Ribeiro, Cavel, Marlier, Montaut, Guidicelli, Perie,Randria,Cliff,Math,Emma,Katell,Andrea,Andriantso,Morelle,Dut,Loizel };
-            //Repartition R = new Repartition(plats, eleves, 4);
+            List<string> plat = new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" };
+        
+            Personne lylfauvel= new Personne("lylfauvel", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 2, 3, 1, 1 });
+            Personne mabadie= new Personne("mabadie", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 3, 2, 4, 1 });
+            Personne lolivo= new Personne("lolivo", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 1, 1, 2, 3 });
+            Personne nnarcisse= new Personne("nnarcisse", new List<string>() { "Tartiflette", "Bolo", }, new List<int>() { 1, 1 });
+            Personne ndelcombel= new Personne("ndelcombel", new List<string>() { "Tartiflette", "Bolo", }, new List<int>() { 1, 2 });
+            Personne chugot= new Personne("chugot", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 1, 2, 4, 3 });
+            Personne mcloarec= new Personne("mcloarec", new List<string>() { "Tartiflette", "Bolo", "Salade", }, new List<int>() { 1, 2, 3, });
+            Personne ebeziau= new Personne("ebeziau", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 1, 2, 2, 3 });
+            Personne hfournier= new Personne("hfournier", new List<string>() { "Tartiflette", "Bolo" }, new List<int>() { 1, 2, });
+            Personne ycoussemacke= new Personne("ycoussemacke", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 1, 3, 4, 2 });
+            Personne dhenry= new Personne("dhenry", new List<string>() { "Tartiflette", "Curry" }, new List<int>() { 1, 2 });
+            Personne mzak= new Personne("mzak", new List<string>() { "Tartiflette", "Curry" }, new List<int>() { 1, 2 });
+            Personne aconquihell= new Personne("aconquihell", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 1, 3, 4, 2 });
+            Personne pcroissant= new Personne("pcroissant", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 3, 1, 2, 3 });
+            Personne lvillette= new Personne("lvillette", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 1, 2, 4, 3 });
+            Personne msevilla= new Personne("msevilla", new List<string>() { "Tartiflette", "Bolo", "Salade", "Curry" }, new List<int>() { 1, 3, 4, 2 });
 
-            ////Affinités
-            //Katell.Affinite.Add(Emma);
-            //Marlier.Affinite.Add(Cavel);
-            //Ribeiro.Affinite.Add(Randria);
-            //Cliff.Affinite.Add(Andrea);
-            //R.Repartir();
-
-            //Repartition desserts
-            List<string> desserts = new List<string>() { "Tiramisu","Tiramisu","Tiramisu","Tiramisu","Browni", "Browni", "Browni", "Browni" ,"Carotte", "Carotte", "Carotte", "Carotte","Salade", "Salade", "Salade" ,"Salade" ,"Coco", "Coco", "Coco", "Coco" };
-            Personne Ribeiro = new Personne("Ribeiro", new List<string>() { "Tiramisu", "Carotte", "Salade", "Coco" }, new List<int>() { 5,2,4,3 });
-            Personne Cavel = new Personne("Cavel", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade", "Coco" }, new List<int>() { 4,5,3,2,5 });
-            Personne Marlier = new Personne("Marlier", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade" }, new List<int>() { 3,5,4,2});
-            Personne Montaut = new Personne("Montaut", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade" }, new List<int>() { 5,4,2,3});
-            Personne Guidicelli = new Personne("Guidicelli", new List<string>() { "Tiramisu", "Browni", "Carotte", "Coco" }, new List<int>() { 5,2,4,3});
-            Personne Perie = new Personne("Perie", new List<string>() {  "Browni", "Carotte" }, new List<int>() { 4, 5 });
-            Personne Randria = new Personne("Randria", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade", "Coco" }, new List<int>() { 5,1,3,2,4 });
-            Personne Cliff = new Personne("Cliff", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade", "Coco" }, new List<int>() { 5,5,4,4,5 });
-            Personne Math = new Personne("Math", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade", "Coco" }, new List<int>() {5,4,3,2,1 });
-            Personne Emma = new Personne("Emma", new List<string>() { "Tiramisu", "Browni",  "Salade", "Coco" }, new List<int>() { 2,3,5,4 });
-            Personne Katell = new Personne("Katell", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade" }, new List<int>() { 5,4,5,4});
-            Personne Andrea = new Personne("Andrea", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade", "Coco" }, new List<int>() {4,5,1,2,3});
-            Personne Andriantso = new Personne("Andriantso", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade", "Coco" }, new List<int>() {5,4,1,3,2 });
-            Personne Morelle = new Personne("Morelle", new List<string>() { "Tiramisu", "Browni",  "Salade", "Coco" }, new List<int>() {5,3,4,2 });
-            Personne Dut = new Personne("Dut", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade", "Coco" }, new List<int>() { 4,5,3,2,1});
-            Personne Loizel = new Personne("Loizel", new List<string>() { "Tiramisu", "Browni", "Carotte", "Salade", "Coco" }, new List<int>() { 4,3,5,1,2 });
-            Personne vide = new Personne("");
-            List<Personne> eleves = new List<Personne>() { vide, Ribeiro, Cavel, Marlier, Montaut, Guidicelli, Perie, Randria, Cliff, Math, Emma, Katell, Andrea, Andriantso, Morelle, Dut, Loizel };
-            Repartition R = new Repartition(desserts, eleves, 4);
-
+            List<Personne> eleves = new List<Personne>() { lylfauvel, mabadie, lolivo, nnarcisse, ndelcombel, chugot, mcloarec, ebeziau, hfournier, ycoussemacke, dhenry, mzak, aconquihell, pcroissant, lvillette, msevilla };
             //Affinités
-            Katell.Affinite.Add(Emma);
-            Marlier.Affinite.Add(Cavel);
-            Ribeiro.Affinite.Add(Randria);
-            Cliff.Affinite.Add(Andrea);
+            nnarcisse.Affinite.Add(lolivo);
+            dhenry.Affinite.Add(mzak);
+            Repartition R = new Repartition(plat, eleves, 4);
             R.Repartir();
         }
     }
