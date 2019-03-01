@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OARP
+namespace DAL
 {
-    class Personne
+    public class Personne
     {
         //PROPRIETE
         public string Nom { get; set; }
         public List<string> Projets { get; set; }
         public List<int> Voeux { get; set; }
         public List<Personne> Affinite { get; set; }
+        public int ID { get; set; }
+        public static int id = 0;
 
         //CONSTRUCTEUR
         public Personne(string nom)
@@ -21,6 +23,8 @@ namespace OARP
             Projets = new List<string>();
             Voeux = new List<int>();
             Affinite = new List<Personne>();
+            ID = id;
+            id++;
         }
 
         public Personne(string nom, List<string> projet, List<int> voeux):this(nom)
@@ -38,7 +42,6 @@ namespace OARP
             }
             Console.WriteLine(affichage);
         }
-        
         public void AjouterVoeux(string projet, int rang)
         {
             Projets.Add(projet);Voeux.Add(rang);
