@@ -18,6 +18,7 @@ namespace OARP
         public List<string> Projets { get; set; }
         public List<string> ListeProjets { get; set; }
         public List<List<int>> VoeuxEleves { get; set; }
+        public List<List<int>> VoeuxRestantsEleves { get; set; }
         public List<string> Eleves { get; set; }
         public List<List<string>> Affinite { get; set; }
         //Liste des meilleurs combinaisons selon les modalités d'évaluation
@@ -43,6 +44,7 @@ namespace OARP
             Eleves = p.Eleves;
             Affinite = p.Affinite;
             VoeuxEleves = p.VoeuEleves;
+            VoeuxRestantsEleves = new List<List<int>>(VoeuxEleves);
             InitialiserProjets();
 
             Seuil = seuil;
@@ -55,7 +57,6 @@ namespace OARP
             N = 0;
             Combinaison = new List<int>();
             NbCombi =Math.Pow(6,Eleves.Count()/3);
-            Console.WriteLine(NbCombi);
         }
         public Repartition(Preference p): this(p,100000)
         {
@@ -120,44 +121,57 @@ namespace OARP
         public void TesterCombinaison(int i)
         //Fonction recursive permettant de tester toutes les possibilités
         {
+            int compteur = 1;
+            int p;
             
-            
-            foreach (string p in ListeProjets)
+            while (compteur <=Seuil)
             {
-                if (VoeuxEleves[i][ListeProjets.IndexOf(p)]!=0)
+                
+                if (VoeuxRestantsEleves[i].IndexOf(compteur)!=-1)
                 {
-                    //AfficherCombinaison(Combinaison);
-                    int indexP = TrouverProjet(Projets.IndexOf(p));
-                    if ((VerifierSeuil(i, p)) && (VerifierAffinite(i, p, indexP)))
+                    p = VoeuxRestantsEleves[i].IndexOf(compteur);
+                    VoeuxRestantsEleves[i][p] = 0;
+                    if (VoeuxEleves[i][p] != 0)
                     {
-                        if (indexP != -1)
-                        {
-                            Combinaison[indexP] = i;
 
-                            if (VerifierEleves())
-                            //Condition d'arret de la recursivité : Si on a plus d'élèves à traiter en stock
+                        AfficherCombinaison(Combinaison);
+                        int indexP = TrouverProjet(p);
+                        if ((VerifierSeuil(i, ListeProjets[p])) && (VerifierAffinite(i, ListeProjets[p], indexP)))
+                        {
+                            if (indexP != -1)
                             {
-                                Chargement();
-                                N++;
-                                //Console.WriteLine("Tentative n° " + N);
-                                if (VerifierProjetComplet())
+                                Combinaison[indexP] = i;
+
+                                if (VerifierEleves())
+                                //Condition d'arret de la recursivité : Si on a plus d'élèves à traiter en stock
                                 {
-                                    //AfficherCombinaison(Combinaison);
-                                    ComparerNotes(Combinaison);
+                                    //Chargement();
+                                    N++;
+                                    //Console.WriteLine("Tentative n° " + N);
+                                    if (VerifierProjetComplet())
+                                    {
+                                        //AfficherCombinaison(Combinaison);
+                                        ComparerNotes(Combinaison);
+                                    }
+                                    Combinaison[indexP] = -1;
                                 }
-                                Combinaison[indexP] = -1;
-                            }
-                            else
-                            {
-                                TesterCombinaison(i+1);
-                                Combinaison[indexP] = -1;
+                                else
+                                {
+                                    TesterCombinaison(i + 1);
+                                    Combinaison[indexP] = -1;
+                                }
                             }
                         }
-                    }
-                
 
+
+                    }
                 }
+                else { compteur++; }
+
+                
             }
+            VoeuxRestantsEleves = new List<List<int>>(VoeuxEleves);
+
         }
 
         //EVALUATION

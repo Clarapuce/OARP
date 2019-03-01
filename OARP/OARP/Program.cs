@@ -10,7 +10,7 @@ namespace OARP
     {
         static void Main(string[] args)
         {
-            Preference p = new Preference(4);
+            Preference p = new Preference(1);
             Repartition r = new Repartition(p,4);
             r.Commencer();
         }
