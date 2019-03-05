@@ -10,6 +10,7 @@ namespace OARP
 {
     class Repartition
     {
+        // TO DO : réglerl'heuristique pour que ça marche quand on a plusieurs places dans un projet.
         //Paramètres de la répartition
         public int PlacesMax { get; set; }
         public int PlacesMin { get; set; }
@@ -40,14 +41,19 @@ namespace OARP
             PlacesMin = p.NbMin;
             NbProjet = p.Choix.Count();
             ListeProjets = p.Choix;
-            Projets = new List<string>(p.Choix);
+            Projets = new List<string>();
             Eleves = p.Eleves;
             Affinite = p.Affinite;
             VoeuxEleves = p.VoeuEleves;
-            VoeuxRestantsEleves = new List<List<int>>(VoeuxEleves);
+            InitialiserCopieVoeux();
             InitialiserProjets();
-
-            Seuil = seuil;
+            Console.WriteLine(p.Choix.Count());
+            if(seuil> p.Choix.Count())
+            {
+                Seuil = p.Choix.Count();
+            }
+            else {   Seuil = seuil;  }
+            
 
             MeilleursCombiMoy = new List<List<int>>();
             MeilleureNoteMoy = -1000;
@@ -58,7 +64,7 @@ namespace OARP
             Combinaison = new List<int>();
             NbCombi =Math.Pow(6,Eleves.Count()/3);
         }
-        public Repartition(Preference p): this(p,100000)
+        public Repartition(Preference p): this(p, p.Choix.Count())
         {
         }
 
@@ -66,14 +72,13 @@ namespace OARP
         public void InitialiserProjets()
         //On crée une liste avec autant de projet qu'il n'y a de places.
         {
-            for (int j = 0; j < NbProjet; j++)
+            foreach(string p in ListeProjets)
             {
-                for (int i = 1; i < PlacesMax; i++)
+                for(int i =0;i<PlacesMax;i++)
                 {
-                    Projets.Add(Projets[j]);
+                    Projets.Add(p);
                 }
             }
-            Projets.Sort();
             Console.WriteLine("Affichage des projets :");
             foreach (string p in Projets)
             {
@@ -92,7 +97,27 @@ namespace OARP
 
         }
 
+        public void InitialiserCopieVoeux()
+        {
+            VoeuxRestantsEleves = new List<List<int>>();
 
+            foreach (List<int> eleve in VoeuxEleves)
+            {
+                int index = VoeuxEleves.IndexOf(eleve);
+                VoeuxRestantsEleves.Add(new List<int>());
+                for (int i = 0; i < NbProjet; i++)
+                {
+                    VoeuxRestantsEleves[index].Add(1);
+                }
+            }
+        }
+        public void RemplirVoeuxRestants(int i)
+        {
+            for(int j =0;j<NbProjet;j++)
+            {
+                VoeuxRestantsEleves[i][j] = 1;
+            }
+        }
         //ALGORITHME DE REPARTITION
         public void Commencer()
         {
@@ -121,27 +146,25 @@ namespace OARP
         public void TesterCombinaison(int i)
         //Fonction recursive permettant de tester toutes les possibilités
         {
+            Console.WriteLine(Eleves[i]);
             int compteur = 1;
             int p;
-            
             while (compteur <=Seuil)
             {
-                
-                if (VoeuxRestantsEleves[i].IndexOf(compteur)!=-1)
+                p = TrouverMeilleurVoeu(compteur,i);
+                Console.WriteLine("COmpteur : "+compteur);
+                if (p!=-1)
                 {
-                    p = VoeuxRestantsEleves[i].IndexOf(compteur);
-                    VoeuxRestantsEleves[i][p] = 0;
                     if (VoeuxEleves[i][p] != 0)
                     {
-
-                        AfficherCombinaison(Combinaison);
+                        
                         int indexP = TrouverProjet(p);
                         if ((VerifierSeuil(i, ListeProjets[p])) && (VerifierAffinite(i, ListeProjets[p], indexP)))
                         {
                             if (indexP != -1)
                             {
                                 Combinaison[indexP] = i;
-
+                                AfficherCombinaison(Combinaison);
                                 if (VerifierEleves())
                                 //Condition d'arret de la recursivité : Si on a plus d'élèves à traiter en stock
                                 {
@@ -165,12 +188,15 @@ namespace OARP
 
 
                     }
+                    
                 }
-                else { compteur++; }
-
+                else
+                { compteur++;
+                    Console.WriteLine("PROUT");
+                }
                 
             }
-            VoeuxRestantsEleves = new List<List<int>>(VoeuxEleves);
+            RemplirVoeuxRestants(i);
 
         }
 
@@ -267,6 +293,30 @@ namespace OARP
             return Projets[Combinaison.IndexOf(eleve)];
         }
 
+        public int TrouverMeilleurVoeu(int compteur,int i)
+        {
+            int p = -1;
+            bool trouve = false;
+            int j = 0;
+            while((trouve==false)&&(j<=NbProjet-1))
+            {
+                if ((VoeuxEleves[i][j]==compteur))
+                {
+                    if(VoeuxRestantsEleves[i][j] != 0)
+                    {
+                        VoeuxRestantsEleves[i][j] = 0;
+                        trouve=true;
+                        p = j;
+                    }
+                    else
+                    {
+                        p = -1;
+                    }
+                }
+                j++;
+            }
+            return p;
+        }
         //VERIFICATIONS
         public bool VerifierEleves()
         {
@@ -284,7 +334,7 @@ namespace OARP
         {
 
             int niveauVoeu = VoeuxEleves[i][ListeProjets.IndexOf(voeu)];
-            if (niveauVoeu >= Seuil)
+            if (niveauVoeu > Seuil)
             {
                  return false;
             }
