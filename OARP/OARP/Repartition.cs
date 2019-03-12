@@ -32,20 +32,20 @@ namespace OARP
         public double NbCombi {get;set;}
 
         //CONSTRUCTEURS
-        public Repartition(Preference p, int seuil)
+        public Repartition(Preference p)
         {
             Console.WriteLine("Initialisation de la répartition");
             PlacesMax = p.NbMax;
             PlacesMin = p.NbMin;
             NbProjet = p.Choix.Count();
             ListeProjets = p.Choix;
-            Projets = new List<string>(p.Choix);
+            Projets = new List<string>();
             Eleves = p.Eleves;
             Affinite = p.Affinite;
             VoeuxEleves = p.VoeuEleves;
             InitialiserProjets();
 
-            Seuil = seuil;
+            Seuil = 0;
 
             MeilleursCombiMoy = new List<List<int>>();
             MeilleureNoteMoy = -1000;
@@ -57,19 +57,17 @@ namespace OARP
             NbCombi =Math.Pow(6,Eleves.Count()/3);
             Console.WriteLine(NbCombi);
         }
-        public Repartition(Preference p): this(p,100000)
-        {
-        }
 
         //INITIALISATION DES DONNEES
         public void InitialiserProjets()
         //On crée une liste avec autant de projet qu'il n'y a de places.
         {
-            for (int j = 0; j < NbProjet; j++)
+           
+            foreach (string p in ListeProjets)
             {
-                for (int i = 1; i < PlacesMax; i++)
+                for (int i = 0; i < PlacesMax; i++)
                 {
-                    Projets.Add(Projets[j]);
+                    Projets.Add(p);
                 }
             }
             Projets.Sort();
@@ -96,8 +94,16 @@ namespace OARP
         public void Commencer()
         {
             DateTime start = DateTime.Now;
-            InitialiserCombinaison();
-            TesterCombinaison(0);
+            do
+            {
+                Seuil++;
+                InitialiserCombinaison();
+                TesterCombinaison(0);
+                
+            }
+            while (MeilleursCombiMax.Count() == 0);
+            
+           
             //SupprimerDoublons();
             Console.WriteLine("=============MAX=============");
             foreach(List<int> combi in MeilleursCombiMax)
@@ -114,6 +120,7 @@ namespace OARP
                 Console.WriteLine();
             }
             Console.WriteLine("Nombre de combinaisons testées : "+N);
+            Console.WriteLine("Seuil : " + Seuil);
             TimeSpan dur = DateTime.Now - start;
             Console.WriteLine("Temps : " + dur);
         }
@@ -270,7 +277,7 @@ namespace OARP
         {
 
             int niveauVoeu = VoeuxEleves[i][ListeProjets.IndexOf(voeu)];
-            if (niveauVoeu >= Seuil)
+            if (niveauVoeu > Seuil)
             {
                  return false;
             }
@@ -400,7 +407,7 @@ namespace OARP
         {
             double ratioFait = Math.Ceiling(N * 100 / NbCombi);
             double ratioPrecedent= Math.Ceiling((N-1) * 100 / NbCombi);
-            if ((ratioFait>ratioPrecedent)||(N==1))
+            if ((ratioFait>ratioPrecedent)||(N==1)||ratioFait<=100)
             {
                 Console.Clear();
                 Console.Write("Chargement : " + ratioFait + "%");

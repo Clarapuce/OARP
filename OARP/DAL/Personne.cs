@@ -13,8 +13,6 @@ namespace DAL
         public List<string> Projets { get; set; }
         public List<int> Voeux { get; set; }
         public List<Personne> Affinite { get; set; }
-        public int ID { get; set; }
-        public static int id = 0;
 
         //CONSTRUCTEUR
         public Personne(string nom)
@@ -23,8 +21,6 @@ namespace DAL
             Projets = new List<string>();
             Voeux = new List<int>();
             Affinite = new List<Personne>();
-            ID = id;
-            id++;
         }
 
         public Personne(string nom, List<string> projet, List<int> voeux):this(nom)

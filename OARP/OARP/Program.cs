@@ -11,7 +11,7 @@ namespace OARP
         static void Main(string[] args)
         {
             Preference p = new Preference(4);
-            Repartition r = new Repartition(p,4);
+            Repartition r = new Repartition(p);
             r.Commencer();
         }
     }
